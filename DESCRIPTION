@@ -1,11 +1,22 @@
 Package: yuck
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Encoding: UTF-8
+Title: Ye Upsold Comprehension Kit
+Version: 0.0.1
+URL: http://github.com/tpq/yuck
+BugReports: http://github.com/tpq/yuck/issues
+Authors@R: c(
+    person("Thomas", "Quinn", email = "contacttomquinn@gmail.com", role = c("aut", "cre"))
+    )
+Description: We all know R is not the place to write for-loops, but some of us really,
+    really like them. This package is inspired by Python's list comprehensions
+    that make it possible to write for-loops in only a few keystrokes. Note that this
+    package makes for-loops faster to write, not faster to run!
+License: GPL-2
 LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+Depends:
+    R (>= 3.2.2)
+Suggests:
+    knitr,
+    microbenchmark,
+    rmarkdown
