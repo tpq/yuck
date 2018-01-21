@@ -42,7 +42,7 @@ The `yuck` package allows for nested loop comprehensions.
 
 ```{r}
 a := for(i in 1:5) for(j in 1:7) i * j
-a
+matrix(a, 7, 5)
 ```
 
 See the vignette for more details.
