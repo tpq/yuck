@@ -6,6 +6,8 @@
 #'
 #' @param left The variable to which to assign the output.
 #' @param right The for-loop(s) to parse.
+#' @param debug A boolean. Toggles whether to print the
+#'  final expression parsed by \code{yuck}.
 #'
 #' @examples
 #' \dontrun{
@@ -24,19 +26,20 @@ NULL
 #' @name yuck
 #' @rdname yuck
 #' @export
-`:=` <- function(left, right){
+`:=` <- function(left, right, debug = FALSE){
 
   # Turn code into string
   expr <- deparse(substitute(right))
+  expr <- string.collapse(expr)
 
   # Pull out iterators
-  iters <- string.extract(expr, "for \\([[:alnum:]] in")
+  iters <- string.extract(expr, "for \\([[:print:]]+? in")
   iters <- gsub("for \\(", "", iters)
   iter <- gsub(" in", "", iters)
 
   # Pull out ranges
   rangs <- gsub("for", "\t", expr) # Add break point for nested for-loops
-  rangs <- string.extract(rangs, "in [[:print:]]+\\) ")
+  rangs <- string.extract(rangs, "in [[:print:]]+?\\) ")
   rangs <- gsub("in ", "", rangs)
   rangs <- gsub("\\) ", "", rangs)
   rang <- sapply(lapply(rangs, string.call), length)
@@ -58,6 +61,7 @@ NULL
 
   # Run for-loop
   loop.final <- loop.pre %+% loop.mid %+% loop.end
+  if(debug) print(loop.final)
   string.call(loop.final)
 
   # Decide whether to unlist

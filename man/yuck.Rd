@@ -6,12 +6,15 @@
 \alias{:=}
 \title{Ye Upsold Comprehension Kit}
 \usage{
-":="(left, right)
+":="(left, right, debug = FALSE)
 }
 \arguments{
 \item{left}{The variable to which to assign the output.}
 
 \item{right}{The for-loop(s) to parse.}
+
+\item{debug}{A boolean. Toggles whether to print the
+final expression parsed by \code{yuck}.}
 }
 \description{
 See Examples.
