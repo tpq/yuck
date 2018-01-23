@@ -41,4 +41,74 @@ matrix(a, 7, 5)
 #> [7,]    7   14   21   28   35
 ```
 
-See the vignette for more details.
+Use cases
+---------
+
+The examples above are arbitrary and the problems presented have better (i.e., vectorized) solutions. Rather, the advantage of `yuck` comes from its use in combination with others tools. For example, we could use `yuck` to iterate across multiple machine learning parameters, models, and predictions. We can also combine `yuck` with `magrittr` to comprehend pipes.
+
+``` r
+library(e1071)
+library(magrittr)
+data(iris)
+groups <- split(sample(1:nrow(iris)), 1:2)
+train <- iris[groups[[1]],]
+test <- iris[groups[[2]],]
+confs := for(kernel in c("linear", "radial", "polynomial"))
+  svm(Species ~ ., train, kernel = kernel) %>%
+  predict(test) %>% table(test$Species)
+confs
+#> [[1]]
+#>             
+#> .            setosa versicolor virginica
+#>   setosa         29          0         0
+#>   versicolor      0         22         0
+#>   virginica       0          2        22
+#> 
+#> [[2]]
+#>             
+#> .            setosa versicolor virginica
+#>   setosa         29          0         0
+#>   versicolor      0         22         1
+#>   virginica       0          2        21
+#> 
+#> [[3]]
+#>             
+#> .            setosa versicolor virginica
+#>   setosa         29          0         0
+#>   versicolor      0         23         7
+#>   virginica       0          1        15
+```
+
+I like using `yuck` to measure CPU time and RAM overhead.
+
+``` r
+library(peakRAM)
+times := for(i in c(1e5, 1e6, 1e7)) data.frame(i,
+  peakRAM(
+    function() 1:i,
+    1:i,
+    1:i + 1:i,
+    1:i * 2
+  ))[,-3]
+times
+#> [[1]]
+#>       i Function_Call Total_RAM_Used_MiB Peak_RAM_Used_MiB
+#> 1 1e+05 function()1:i                0.4               0.4
+#> 2 1e+05           1:i                0.4               0.4
+#> 3 1e+05       1:i+1:i                0.4               0.8
+#> 4 1e+05         1:i*2                0.8               1.2
+#> 
+#> [[2]]
+#>       i Function_Call Total_RAM_Used_MiB Peak_RAM_Used_MiB
+#> 1 1e+06 function()1:i                3.9               3.9
+#> 2 1e+06           1:i                3.9               3.9
+#> 3 1e+06       1:i+1:i                3.9               7.7
+#> 4 1e+06         1:i*2                7.7              11.5
+#> 
+#> [[3]]
+#>       i Function_Call Total_RAM_Used_MiB Peak_RAM_Used_MiB
+#> 1 1e+07 function()1:i               38.2              38.2
+#> 2 1e+07           1:i               38.2              38.2
+#> 3 1e+07       1:i+1:i               38.2              76.3
+#> 4 1e+07         1:i*2               76.3             114.5
+```

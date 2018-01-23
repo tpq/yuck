@@ -138,3 +138,34 @@ You can, however, have an `sapply` within a loop comprehension.
 a := for(i in 1:3) i * sapply(1:i, sum)
 a
 ```
+
+## Use cases
+
+The examples above are arbitrary and the problems presented have better (i.e., vectorized) solutions. Rather, the advantage of `yuck` comes from its use in combination with others tools. For example, we could use `yuck` to iterate across multiple machine learning parameters, models, and predictions. We can also combine `yuck` with `magrittr` to comprehend pipes.
+
+```{r}
+library(e1071)
+library(magrittr)
+data(iris)
+groups <- split(sample(1:nrow(iris)), 1:2)
+train <- iris[groups[[1]],]
+test <- iris[groups[[2]],]
+confs := for(kernel in c("linear", "radial", "polynomial"))
+  svm(Species ~ ., train, kernel = kernel) %>%
+  predict(test) %>% table(test$Species)
+confs
+```
+
+I like using `yuck` to measure CPU time and RAM overhead.
+
+```{r}
+library(peakRAM)
+times := for(i in c(1e5, 1e6, 1e7)) data.frame(i,
+  peakRAM(
+    function() 1:i,
+    1:i,
+    1:i + 1:i,
+    1:i * 2
+  ))[,-3]
+times
+```
