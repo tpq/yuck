@@ -1,6 +1,6 @@
 Package: yuck
 Title: Ye Upsold Comprehension Kit
-Version: 0.0.1
+Version: 0.0.2
 URL: http://github.com/tpq/yuck
 BugReports: http://github.com/tpq/yuck/issues
 Authors@R: c(
@@ -17,6 +17,9 @@ RoxygenNote: 6.0.1
 Depends:
     R (>= 3.2.2)
 Suggests:
+    e1071,
     knitr,
+    magrittr,
+    peakRAM,
     microbenchmark,
     rmarkdown
