@@ -5,7 +5,6 @@
 #'
 #' @param x A character string. The text to search.
 #' @param match A character string. The regex text to match.
-#' @export
 string.extract <- function(x, match){
 
   # Match regular expression and index location
@@ -30,7 +29,6 @@ string.extract <- function(x, match){
 #' @param text A character string. The text to append.
 #' @param last A logical. Toggles whether to append only the
 #'  final match.
-#' @export
 string.append <- function(x, match, text, last = FALSE){
 
   # Match regular expression and index location
@@ -60,7 +58,6 @@ string.append <- function(x, match, text, last = FALSE){
 #'  to a single character string.
 #'
 #' @inheritParams string.extract
-#' @export
 string.collapse <- function(x){
 
   paste(x, collapse = "")
@@ -72,7 +69,6 @@ string.collapse <- function(x){
 #'  of individual character strings.
 #'
 #' @inheritParams string.extract
-#' @export
 string.explode <- function(x){
 
   unlist(strsplit(x, split = ""))
@@ -83,7 +79,6 @@ string.explode <- function(x){
 #' \code{string.call} executes a string as an expression.
 #'
 #' @inheritParams string.extract
-#' @export
 string.call <- function(x){
 
   env <- parent.frame()
@@ -95,7 +90,6 @@ string.call <- function(x){
 #' \code{\%+\%} is a binary operator that wraps \code{paste0}.
 #'
 #' @param e1,e2 A character string.
-#' @export
 `%+%` <- function(e1, e2){
 
   paste0(e1, e2)
