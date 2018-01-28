@@ -29,16 +29,16 @@ Nested loop comprehensions
 The `yuck` package allows for nested loop comprehensions.
 
 ``` r
-a := for(i in 1:5) for(j in 1:7) i * j
+a := for(i in 1:5) for(j in 1:7) (i - 1)^2 + (j - 1)^2
 matrix(a, 7, 5)
 #>      [,1] [,2] [,3] [,4] [,5]
-#> [1,]    1    2    3    4    5
-#> [2,]    2    4    6    8   10
-#> [3,]    3    6    9   12   15
-#> [4,]    4    8   12   16   20
-#> [5,]    5   10   15   20   25
-#> [6,]    6   12   18   24   30
-#> [7,]    7   14   21   28   35
+#> [1,]    0    1    4    9   16
+#> [2,]    1    2    5   10   17
+#> [3,]    4    5    8   13   20
+#> [4,]    9   10   13   18   25
+#> [5,]   16   17   20   25   32
+#> [6,]   25   26   29   34   41
+#> [7,]   36   37   40   45   52
 ```
 
 Use cases
@@ -60,23 +60,23 @@ confs
 #> [[1]]
 #>             
 #> .            setosa versicolor virginica
-#>   setosa         29          0         0
-#>   versicolor      0         22         0
-#>   virginica       0          2        22
+#>   setosa         22          0         0
+#>   versicolor      0         26         1
+#>   virginica       0          0        26
 #> 
 #> [[2]]
 #>             
 #> .            setosa versicolor virginica
-#>   setosa         29          0         0
-#>   versicolor      0         22         1
-#>   virginica       0          2        21
+#>   setosa         22          0         0
+#>   versicolor      0         26         2
+#>   virginica       0          0        25
 #> 
 #> [[3]]
 #>             
 #> .            setosa versicolor virginica
-#>   setosa         29          0         0
-#>   versicolor      0         23         7
-#>   virginica       0          1        15
+#>   setosa         22          0         0
+#>   versicolor      0         26         5
+#>   virginica       0          0        22
 ```
 
 I like using `yuck` to measure CPU time and RAM overhead.
@@ -100,15 +100,15 @@ times
 #> 
 #> [[2]]
 #>       i Function_Call Total_RAM_Used_MiB Peak_RAM_Used_MiB
-#> 1 1e+06 function()1:i                3.9               3.9
-#> 2 1e+06           1:i                3.9               3.9
-#> 3 1e+06       1:i+1:i                3.9               7.7
-#> 4 1e+06         1:i*2                7.7              11.5
+#> 1 1e+06 function()1:i                3.8               3.8
+#> 2 1e+06           1:i                3.8               3.8
+#> 3 1e+06       1:i+1:i                3.8               7.6
+#> 4 1e+06         1:i*2                7.6              11.4
 #> 
 #> [[3]]
 #>       i Function_Call Total_RAM_Used_MiB Peak_RAM_Used_MiB
-#> 1 1e+07 function()1:i               38.2              38.2
-#> 2 1e+07           1:i               38.2              38.2
-#> 3 1e+07       1:i+1:i               38.2              76.3
-#> 4 1e+07         1:i*2               76.3             114.5
+#> 1 1e+07 function()1:i               38.1              38.1
+#> 2 1e+07           1:i               38.1              38.1
+#> 3 1e+07       1:i+1:i               38.1              76.2
+#> 4 1e+07         1:i*2               76.2             114.4
 ```
