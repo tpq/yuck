@@ -1,6 +1,6 @@
 Package: yuck
 Title: Ye Upsold Comprehension Kit
-Version: 0.0.2
+Version: 0.0.3
 URL: http://github.com/tpq/yuck
 BugReports: http://github.com/tpq/yuck/issues
 Authors@R: c(

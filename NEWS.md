@@ -1,3 +1,8 @@
+## yuck 0.0.3
+---------------------
+* Extend `:=` to work while embedded inside other functions
+* Stop export of `string.` backend functions
+
 ## yuck 0.0.2
 ---------------------
 * Make iterator and range regex match non-greedy
