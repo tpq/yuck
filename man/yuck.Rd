@@ -27,7 +27,7 @@ a
 a := for(i in 1:5) i \%in\% 1:4
 a
 
-a := for(i in 1:5) for(j in 1:7) i * j
+a := for(i in 1:5) for(j in 1:7) (i - 1)^2 + (j - 1)^2
 matrix(a, 7, 5)
 }
 }

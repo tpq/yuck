@@ -17,7 +17,7 @@
 #' a := for(i in 1:5) i %in% 1:4
 #' a
 #'
-#' a := for(i in 1:5) for(j in 1:7) i * j
+#' a := for(i in 1:5) for(j in 1:7) (i - 1)^2 + (j - 1)^2
 #' matrix(a, 7, 5)
 #' }
 #' @name yuck
@@ -42,7 +42,14 @@ NULL
   rangs <- string.extract(rangs, "in [[:print:]]+?\\) ")
   rangs <- gsub("in ", "", rangs)
   rangs <- gsub("\\) ", "", rangs)
-  rang <- sapply(lapply(rangs, string.call), length)
+
+  # Evaluate the ranges in parent environment
+  rang <- vector("numeric", length(rangs))
+  env <- parent.frame()
+  for(r in 1:length(rangs)){
+    parentRang <- parse(text = rangs[r])
+    rang[r] <- length(eval(parentRang, env))
+  }
 
   # Define output result container
   loop.pre <- 'out9000 <- vector("list", ' %+% prod(rang) %+% '); counter <- 0;'
@@ -62,7 +69,12 @@ NULL
   # Run for-loop
   loop.final <- loop.pre %+% loop.mid %+% loop.end
   if(debug) print(loop.final)
-  string.call(loop.final)
+
+  # Evaluate the loop in parent environment
+  env <- parent.frame()
+  parentLoop <- parse(text = loop.final)
+  eval(parentLoop, env)
+  out9000 <- get("out9000", env)
 
   # Decide whether to unlist
   if(all(sapply(out9000, is.numeric)) |
