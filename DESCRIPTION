@@ -1,6 +1,6 @@
 Package: yuck
 Title: Ye Upsold Comprehension Kit
-Version: 0.0.3
+Version: 0.0.4
 URL: http://github.com/tpq/yuck
 BugReports: http://github.com/tpq/yuck/issues
 Authors@R: c(
@@ -13,7 +13,8 @@ Description: We all know R is not the place to write for-loops, but some of us r
 License: GPL-2
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
+Encoding: UTF-8
 Depends:
     R (>= 3.2.2)
 Suggests:

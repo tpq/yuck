@@ -2,7 +2,6 @@
 % Please edit documentation in R/2-yuck.R
 \name{yuck}
 \alias{yuck}
-\alias{yuck}
 \alias{:=}
 \title{Ye Upsold Comprehension Kit}
 \usage{

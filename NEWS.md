@@ -1,3 +1,9 @@
+## yuck 0.0.4
+---------------------
+* Extend `:=` to support bracketed procedures
+    * Throw error if a single line of code exceeds 500 characters
+    * Collapse each line of the parsed expression with `; `
+
 ## yuck 0.0.3
 ---------------------
 * Extend `:=` to work while embedded inside other functions

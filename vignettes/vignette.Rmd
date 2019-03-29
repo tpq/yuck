@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-We all know R is not the place to write for-loops, but some of us really, really like them. This package is inspired by Python's list comprehensions that make it possible to write for-loops in only a few keystrokes. Note that this package makes for-loops faster to write, not faster to run.
+We all know R is not the place to write for-loops, but some of us really, really like them. This package is inspired by Python's list comprehensions which make it possible to write for-loops in only a few keystrokes. Note that this package makes for-loops faster to write, not faster to run.
     
 You can install the most recent version of `yuck` from GitHub:
 

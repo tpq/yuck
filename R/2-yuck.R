@@ -29,8 +29,12 @@ NULL
 `:=` <- function(left, right, debug = FALSE){
 
   # Turn code into string
-  expr <- deparse(substitute(right))
-  expr <- string.collapse(expr)
+  expr <- deparse(substitute(right), width.cutoff = 500)
+  numChars <- sapply(expr, nchar)
+  if(any(numChars >= 500)){
+    stop("A single line of code cannot exceed 500 characters.")
+  }
+  expr <- paste(expr, collapse = "; ")
 
   # Pull out iterators
   iters <- string.extract(expr, "for \\([[:print:]]+? in")
